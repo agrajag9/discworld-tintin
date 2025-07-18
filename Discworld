@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-BASEDIR="$HOME/src/discworld-tintin"
-cd "$BASEDIR"
+BASEDIR="$HOME/.local/share/discworld-tintin"
+echo "$BASEDIR"
 
 # No existing discworld session? Then create one
 if [[ ! $(tmux ls -F '#S') =~ discworld ]]; then
@@ -29,8 +29,6 @@ if [ -n "$TMUX" ] || [ "$DISC_SESSION_CREATE" = "1" ]; then
     tmux split-window -v -b -l 4
     tmux send-keys "clear && tail -f $BASEDIR/logs/chat.log" 'C-m'
 
-    # Did we ask for the full layout?
-    if [[ $1 == "full" ]]; then
         # Horizontal split and load spottimers
         tmux select-pane -t discworld:1.1
         tmux split-window -h -l 28
@@ -43,7 +41,6 @@ if [ -n "$TMUX" ] || [ "$DISC_SESSION_CREATE" = "1" ]; then
         # Place the ASCII map at the bottom
         tmux split-window -v -p 50
         tmux send-keys "topless cat $BASEDIR/logs/minimap.log" 'C-m'
-    fi
 
     # Cut back to main window, vertical split for mapdoortext
     tmux select-pane -t discworld:1.1
@@ -52,7 +49,7 @@ if [ -n "$TMUX" ] || [ "$DISC_SESSION_CREATE" = "1" ]; then
 
     # Select main pane again and load TinTin++ with our config
     tmux select-pane -t discworld:1.1
-    tmux send-keys "clear && tt++ -G config.tin" 'C-m'
+    tmux send-keys "clear && tt++ -G $BASEDIR/config.tin" 'C-m'
 fi
 
 if [ -z "$TMUX" ]; then
