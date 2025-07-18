@@ -1,2 +1,5 @@
+#!/usr/bin/env bash
+
 # clear && watch -c -t -n 5 'clear && cat logs/xptimers.log'
-watch -ctn 0.4 'clear;cat logs/xptimers.log'
+#watch -ctn 0.4 'clear;cat logs/xptimers.log'
+topless -c ./logs/xptimers.log

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 clear && while true; do 
     output=$(clear; cat logs/groupshields.log);
